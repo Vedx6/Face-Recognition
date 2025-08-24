@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Web App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        /* Professional Theme with Light Orange Accents */
+        :root {
+            --primary-color: #ff9f43;
+            --primary-dark: #e88c30;
+            --secondary-color: #2c3e50;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header Styling */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            width: 40px;
+            margin-right: 12px;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand span {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--secondary-color) !important;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .navbar-nav .nav-link:hover, 
+        .navbar-nav .nav-link.active {
+            background-color: rgba(255, 159, 67, 0.1);
+            color: var(--primary-color) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        /* Main Content Container */
+        .main-container {
+            min-height: calc(100vh - 200px);
+            padding: 40px 0;
+        }
+        
+        /* Section Styling */
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 80px;
+            background: var(--primary-color);
+        }
+        
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        /* Footer Styling */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+        
+        .footer-title {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-light);
+        }
+        
+        /* Utility Classes */
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+        
+        .bg-primary-light {
+            background-color: rgba(255, 159, 67, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .navbar-collapse {
+                background-color: var(--white);
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: var(--shadow);
+                margin-top: 10px;
+            }
+            
+            .navbar-nav .nav-link {
+                padding: 10px 15px;
+                margin-bottom: 5px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .section {
+                margin-bottom: 40px;
+            }
+            
+            footer {
+                text-align: center;
+            }
+            
+            .footer-section {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--white); z-index: 9999; display: flex; justify-content: center; align-items: center;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/static/images/logo.svg" alt="Logo" class="logo">
+                <span>Face Recognition</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/app/' in request.path %}active{% endif %}" href="/app/">
+                            <i class="fas fa-camera me-1"></i> App
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">
+                            <i class="fas fa-info-circle me-1"></i> About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact/">
+                            <i class="fas fa-envelope me-1"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex ms-lg-3">
+                    <a href="/login/" class="btn btn-outline-secondary me-2">Login</a>
+                    <a href="/register/" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            {% block bodyblock %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 footer-section">
+                    <h5 class="footer-title">About Vedx</h5>
+                    <p>Advanced face recognition technology providing secure, accurate, and efficient solutions for businesses and individuals.</p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/app/">App</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 footer-section">
+                    <h5 class="footer-title">Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/tutorials/">Tutorials</a></li>
+                        <li><a href="/faq/">FAQ</a></li>
+                        <li><a href="/support/">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 footer-section">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Park, Silicon Valley</li>
+                        <li><i class="fas fa-phone-alt me-2"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@vedx.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Vedx Face Recognition. All rights reserved.</p>
+                <div class="mt-2">
+                    <a href="/privacy-policy/" class="me-3 text-muted">Privacy Policy</a>
+                    <a href="/terms-of-service/" class="text-muted">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Remove preloader once page is loaded
+        window.addEventListener('load', function() {
+            document.getElementById('preloader').style.display = 'none';
+        });
+        
+        // Add active class to current nav item
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLocation = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+    <!-- Extra scripts for specific pages -->
+    {% block extrascripts %}
+    {% endblock %}
+</body>
+</html>

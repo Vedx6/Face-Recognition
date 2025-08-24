@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #1c1c1e;
+        color: #e5e5e7;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .section-title {
+        color: #F2C078;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        margin-bottom: 2rem;
+    }
+
+    .btn-custom {
+        background-color: #F2C078;
+        color: #1c1c1e;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-custom:hover {
+        background-color: #d9ac56;
+        color: #000;
+    }
+
+    .image-fluid {
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    table {
+        background-color: rgba(255,255,255,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        color: #fff;
+    }
+
+    .table th {
+        background-color: rgba(255,255,255,0.08);
+    }
+
+    video {
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+</style>
+{% endblock %}
+
+{% block bodyblock %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="glass-card">
+                <h2 class="section-title">Gender Classification</h2>
+                <p>Upload an image (.jpg, .jpeg, .png), and our model will detect the face and predict the gender.</p>
+
+                <!-- Upload Form -->
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" name="image_name" required>
+                        <input type="submit" value="Upload & Predict" class="btn btn-custom">
+                    </div>
+                </form>
+
+                <!-- Webcam Controls -->
+                <div class="mb-3">
+                    <button class="btn btn-custom me-2" onclick="startWebcam()">Start Webcam</button>
+                    <button class="btn btn-danger" onclick="stopWebcam()">Stop Webcam</button>
+                </div>
+
+                <!-- Webcam Video -->
+                <video id="webcam" width="100%" height="300" autoplay></video>
+                <canvas id="capturedImage" style="display:none;"></canvas>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            {% if fileupload %}
+            <div class="glass-card">
+                <h3 class="section-title">Predicted Image</h3>
+                <img src="/static/predict/prediction_image.jpg" class="img-fluid image-fluid mb-3" width="100%" alt="Prediction">
+
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Detection Face</th>
+                            <th>Eigen Image</th>
+                            <th>Prediction</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for element in report %}
+                        <tr>
+                            <td><img src="/static/predict/{{ element[0] }}" class="image-fluid" height="100" alt=""></td>
+                            <td><img src="/static/predict/{{ element[1] }}" class="image-fluid" height="100" alt=""></td>
+                            <td>{{ element[2] }}</td>
+                            <td>{{ element[3] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    let webcamStream;
+
+    function startWebcam() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                webcamStream = stream;
+                document.getElementById('webcam').srcObject = stream;
+            })
+            .catch(err => console.error("Error accessing webcam: ", err));
+    }
+
+    function stopWebcam() {
+        if (webcamStream) {
+            let tracks = webcamStream.getTracks();
+            tracks.forEach(track => track.stop());
+        }
+        document.getElementById('webcam').srcObject = null;
+    }
+
+    function captureImage() {
+        let video = document.getElementById('webcam');
+        let canvas = document.getElementById('capturedImage');
+        let context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        let imageData = canvas.toDataURL('image/png');
+        document.getElementById('imageData').value = imageData;
+        document.getElementById('webcamForm').submit();
+    }
+</script>
+{% endblock %}

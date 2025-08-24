@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block styles %}
+<style>
+    .app-header {
+        background: linear-gradient(135deg, #0066CC 0%, #1a3a5f 100%);
+        color: white;
+        padding: 60px 0;
+    }
+    
+    .app-card {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s;
+        height: 100%;
+        border: none;
+    }
+    
+    .app-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .app-img {
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .app-card .card-body {
+        padding: 25px;
+    }
+    
+    .app-badge {
+        background-color: rgba(0, 102, 204, 0.1);
+        color: #0066CC;
+        font-weight: 600;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+</style>
+{% endblock %}
+
+{% block bodyblock %}
+<!-- Applications Header -->
+<section class="app-header">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">Our AI Vision Applications</h1>
+        <p class="lead mx-auto" style="max-width: 700px;">
+            Explore our suite of advanced computer vision applications powered by state-of-the-art machine learning technology.
+        </p>
+    </div>
+</section>
+
+<!-- Applications Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card app-card">
+                    <img src="{{ url_for('static', filename='images/gender.png') }}" class="app-img" alt="Gender Classification">
+                    <div class="card-body">
+                        <span class="app-badge">Featured</span>
+                        <h4>Gender Classification</h4>
+                        <p class="text-muted">
+                            Our gender classification technology accurately detects gender from facial images using advanced deep learning models.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                            <div>
+                                <span class="text-success me-2"><i class="fas fa-check-circle"></i></span>
+                                <span class="small text-muted">98% Accuracy</span>
+                            </div>
+                            <a href="/app/gender/" class="btn btn-primary">Try Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card app-card">
+                    <img src="{{ url_for('static', filename='images/age-app.jpg') }}" class="app-img" alt="Age Estimation">
+                    <div class="card-body">
+                        <span class="app-badge">Coming Soon</span>
+                        <h4>Age Estimation</h4>
+                        <p class="text-muted">
+                            Estimate age from facial images with high precision using our proprietary convolutional neural networks.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                            <div>
+                                <span class="text-success me-2"><i class="fas fa-check-circle"></i></span>
+                                <span class="small text-muted">±3.6 Years MAE</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card app-card">
+                    <img src="{{ url_for('static', filename='images/emotion-app.jpg') }}" class="app-img" alt="Emotion Recognition">
+                    <div class="card-body">
+                        <span class="app-badge">Coming Soon</span>
+                        <h4>Emotion Recognition</h4>
+                        <p class="text-muted">
+                            Detect 7 basic emotional states from facial expressions with real-time processing capabilities.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                            <div>
+                                <span class="text-success me-2"><i class="fas fa-check-circle"></i></span>
+                                <span class="small text-muted">95% Accuracy</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

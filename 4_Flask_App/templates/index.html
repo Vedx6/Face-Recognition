@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block bodyblock %}
+<style>
+    body {
+        background-color: #1c1c1e;
+        color: #e5e5e7;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: url('/static/images/background.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    .section-title {
+        color: #39FF14;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); /* Added text shadow for better visibility */
+    }
+    
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        margin-bottom: 2rem;
+    }
+    
+    .glass-card ul li::before {
+        content: "✓";
+        color: #F2C078;
+        margin-right: 10px;
+    }
+    
+    /* Improved list item visibility */
+    .list-unstyled li {
+        font-weight: 500;
+        margin-bottom: 0.8rem !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Improved lead text visibility */
+    .lead-text {
+        color: #ff3b3b; /* Brighter red for better visibility */
+        font-weight: 600;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-custom {
+        background-color: #F2C078;
+        color: #1c1c1e;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .btn-custom:hover {
+        background-color: #d9ac56;
+        color: #000;
+    }
+    
+    .feature-img {
+        max-height: 400px;
+        border-radius: 16px;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<div class="container py-5">
+    <div class="row align-items-center">
+        <!-- Text Content -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="display-5 section-title">Gender Classification AI</h2>
+            <p class="lead-text mb-4">
+                Our cutting-edge machine learning model delivers instant, accurate gender classification through advanced image processing techniques.
+            </p>
+            
+            <div class="glass-card">
+                <h5 class="section-title">How It Works</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">Grayscale image conversion</li>
+                    <li class="mb-2">Precision facial detection</li>
+                    <li class="mb-2">Advanced AI classification</li>
+                </ul>
+            </div>
+            
+            <a href="/app/gender/" class="btn btn-custom">Launch Gender App</a>
+        </div>
+        
+        <!-- Image Content -->
+        <div class="col-lg-6 text-center">
+            <img src="https://assets.api.gamma.app/7i5sl6l6ypdswo5/screenshots/0cz9j7148p4ye31/cr3saa7kxfqww4e/slide/ty2iPsHoZoGbIAGpG0n3JYqlC9w" 
+                 alt="Gender Recognition Animation" 
+                 class="img-fluid feature-img">
+        </div>
+    </div>
+</div>
+{% endblock %}
