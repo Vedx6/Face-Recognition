@@ -1,0 +1,31 @@
+# --- Virtual environments & installed packages ---
+venv/
+env/
+Lib/
+**/Lib/
+**/site-packages/
+
+# --- Data & model folders anywhere in the project ---
+data/
+models/
+**/data/
+**/models/
+
+# --- Large/binary artifacts (ignore everywhere) ---
+*.pkl
+*.pickle
+*.zip
+*.npz
+*.h5
+*.ckpt
+*.dat
+*.dll
+*.pyd
+
+# --- Caches / temp ---
+__pycache__/
+**/__pycache__/
+*.pyc
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+.vercel
