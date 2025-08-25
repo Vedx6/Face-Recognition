@@ -3,18 +3,17 @@
 A Flask-based face recognition system that uses **deep learning** and **OpenCV** to detect and recognize faces.  
 This project demonstrates how to integrate AI models into a web app and deploy them online.  
 
-🚀 **Live Demo:** [NeuroVis on Render](https://neurovis.onrender.com)  
+🚀 **Live Demo:** [NeuroVis] (https://neurovis.onrender.com)  
 
 ---
 
 ## 📸 Screenshots  
 
-### 🔹 Home Page
-![Home Page](C:\Python Project\003 FaceRecognition-Flask-main\4_Flask_App\static\demo\Screenshot 2025-08-25 183656.png)
+🔹 Home Page  
+![Home Page](4_Flask_App/static/demo/Screenshot1.png)  
 
-### 🔹 Recognition Result
-![Result](C:\Python Project\003 FaceRecognition-Flask-main\4_Flask_App\static\demo\Screenshot 2025-08-25 184129.png)
-
+🔹 Recognition Result  
+![Result](4_Flask_App/static/demo/Screenshot2.png)
 ---
 
 ## ✨ Features  
