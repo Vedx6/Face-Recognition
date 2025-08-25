@@ -1,0 +1,12 @@
+Flask
+gunicorn
+numpy==2.2.2
+opencv-python-headless==4.11.0.86
+requests==2.32.3
+SQLAlchemy==2.0.38
+typing_extensions==4.12.2
+opencv-python
+scikit-learn
+matplotlib
+
+
